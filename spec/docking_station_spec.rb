@@ -17,12 +17,12 @@ describe DockingStation do
     expect(subject).to respond_to(:dock).with(1)
   end
 
-it { is_expected.to respond_to(:bike)}
+it { is_expected.to respond_to(:bikes)}
 
 it 'returns docked bikes' do
   bike = Bike.new
   subject.dock(bike)
-  expect(subject.bike).to eq bike 
+  expect(subject.bikes).to eq [bike]
 end
 
 it 'raises an error when there are no available bikes' do
@@ -32,7 +32,7 @@ end
  
 it 'raises an error when there is a bike already docked' do
   ds = DockingStation.new
-  ds.dock(Bike.new)
+  20.times {ds.dock(Bike.new)}
   expect {ds.dock(Bike.new)}.to raise_error("TooManyBike")
 end
 
