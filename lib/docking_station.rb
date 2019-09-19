@@ -3,15 +3,14 @@ require_relative 'bike'
 class DockingStation
   attr_reader :bike
 
-  #is the same as
-  #def bike
-  #  @bike
-  # end
-
-  @docked_bikes = []
-
   def release_bike
-    Bike.new
+    if @bike != nil
+      @bike = nil
+      Bike.new
+      
+    else
+      raise "NoBikeError"
+    end
   end    
 
   def dock(bike)

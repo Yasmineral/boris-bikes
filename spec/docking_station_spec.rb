@@ -6,8 +6,10 @@ describe DockingStation do
     expect(subject).to respond_to :release_bike
   end
 
-  it 'releases working bikes' do
-    bike = subject.release_bike
+  it 'releases working bikes from occupied stations' do
+    docking_station = DockingStation.new
+    docking_station.dock(Bike.new)
+    bike = docking_station.release_bike
     expect(bike).to be_working
   end
 
@@ -23,4 +25,12 @@ it 'returns docked bikes' do
   expect(subject.bike).to eq bike 
 end
 
+it 'raises an error when there are no available bikes' do
+  docking_station = DockingStation.new 
+  expect {docking_station.release_bike}.to raise_error("NoBikeError")
+end
+ 
+
 end 
+
+#refactor later like James did / group tests by method
