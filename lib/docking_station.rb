@@ -7,16 +7,17 @@ class DockingStation
     if @bike != nil
       @bike = nil
       Bike.new
-      
     else
       raise "NoBikeError"
     end
   end    
 
   def dock(bike)
-    # Use an instance variable to store the bike
-    # in the 'state' of this instance
-    @bike = bike
+    if @bike != nil
+      raise "TooManyBike"
+    else  
+      @bike = bike
+    end  
   end
 
 end

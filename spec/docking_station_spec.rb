@@ -30,6 +30,11 @@ it 'raises an error when there are no available bikes' do
   expect {docking_station.release_bike}.to raise_error("NoBikeError")
 end
  
+it 'raises an error when there is a bike already docked' do
+  ds = DockingStation.new
+  ds.dock(Bike.new)
+  expect {ds.dock(Bike.new)}.to raise_error("TooManyBike")
+end
 
 end 
 
