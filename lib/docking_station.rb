@@ -11,8 +11,12 @@ class DockingStation
 
   def release_bike
     fail 'NoBikeError' if @bikes.empty?
-    @bikes.pop
-    Bike.new
+    current_bike = @bikes.pop
+    if current_bike.working?
+      current_bike
+    else
+      fail 'FaultyBikeError' 
+    end
   end    
 
   def dock(bike)

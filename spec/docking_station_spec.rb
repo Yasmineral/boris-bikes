@@ -39,6 +39,12 @@ end
 it {expect(DockingStation.new(5).capacity).to eq 5}
 it {expect(DockingStation.new.capacity).to eq 20}
 
+it "doesn't release a bike if it is broken" do
+  my_bike = Bike.new
+  my_bike.report_broken
+  subject.dock(my_bike)
+  expect{subject.release_bike}.to raise_error("FaultyBikeError") 
+end
+
 end 
 
-#refactor later like James did / group tests by method
