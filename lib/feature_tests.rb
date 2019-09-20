@@ -5,10 +5,7 @@ require_relative 'van'
 station = DockingStation.new
 my_bike = Bike.new
 my_bike.report_broken
-station.dock(Bike.new)
 station.dock(my_bike)
-
 van = Van.new
 van.pick_up(station)
-
-puts station.bikes
+van.drop_off(Garage.new)

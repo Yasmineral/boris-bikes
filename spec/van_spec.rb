@@ -1,4 +1,7 @@
 require 'van'
+require 'bike'
+require 'docking_station'
+require 'garage'
 
 describe Van do
 
@@ -23,5 +26,19 @@ describe Van do
     #check if the van is holding a bike
     expect((van.bike)).to eq bike
   end
+
+  describe '#drop_off'
+    it "drops off a bike, then is empty" do
+      van = Van.new
+      bike = Bike.new
+      station = DockingStation.new
+      bike.report_broken
+      station.dock(bike)
+      van.pick_up(station)
+      van.drop_off(Garage.new)
+
+      expect(van.bike).to eq nil
+
+    end
 
 end

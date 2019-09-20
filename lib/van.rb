@@ -8,10 +8,16 @@ attr_reader :bike
 
   #the pick up method accepts a BROKEN bike and stores in in the van
   def pick_up(station)
-
     current_bike = (station.bikes).pop
     fail "this bike is working" if current_bike.working? == true
     @bike = current_bike
   end
+
+  def drop_off(garage)
+    garage.bikes << @bike
+    @bike = nil
+  end
+
+
 
 end
