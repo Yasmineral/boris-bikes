@@ -8,10 +8,7 @@ describe DockingStation do
 
   it 'releases working bikes from occupied stations' do
     docking_station = DockingStation.new
-
-    double_bike = double("bike")
-    allow(double_bike).to receive(:working?).and_return(true)
-
+    double_bike = double(:bike, working?: true)
     docking_station.dock(double_bike)
     expect(double_bike.working?).to eq true
   end
@@ -43,9 +40,11 @@ it {expect(DockingStation.new(5).capacity).to eq 5}
 it {expect(DockingStation.new.capacity).to eq 20}
 
 it "doesn't release a bike if it is broken" do
-  my_bike = double(:bike)
-  my_bike.report_broken
-  subject.dock(my_bike)
+  double_bike = double("bike")
+  allow(double_bike).to receive(:report_broken)
+  allow(double_bike).to receive(:working?)
+  double_bike.report_broken
+  subject.dock(double_bike)
   expect{subject.release_bike}.to raise_error("FaultyBikeError")
 end
 
