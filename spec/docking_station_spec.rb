@@ -32,9 +32,12 @@ end
  
 it 'raises an error when there is a bike already docked' do
   ds = DockingStation.new
-  20.times {ds.dock(Bike.new)}
+  DockingStation::DEFAULT_CAPACITY.times {ds.dock(Bike.new)}
   expect {ds.dock(Bike.new)}.to raise_error("TooManyBike")
 end
+
+it {expect(DockingStation.new(5).capacity).to eq 5}
+it {expect(DockingStation.new.capacity).to eq 20}
 
 end 
 
